@@ -12,17 +12,33 @@ Page({
     scale: 5,
     markers: [{
       id: 1,
-      latitude: 0,
-      longitude: 0,
-      // iconPath: '/image/location.png',
+      latitude: 30.74501,
+      longitude: 120.75,
+      iconPath: '/image/location.png',
+      width: 40,
+      height: 40,
       callout: {
         content: '原点',
-        color: '#000',
+        color: '#ffffff',
         display: 'ALWAYS',
-        bgColor: 'rgba(0, 0, 0, 0)'
+        bgColor: '#ff0000',
+        padding: 5,
+        borderRadius: 20,
       },
+      label: {
+        content: '嘿嘿',
+        color: '#ffffff',
+        bgColor: '#0000ff',
+        anchorX: 10,  // 原点是在左上角
+        anchorY: -30,
+        padding: 5,
+        borderRadius: 20,
+      }
       
-    }]
+    }],
+    department: '',
+    ill: '',
+    region: ['浙江省', '嘉兴市', '南湖区']
   },
   // 事件绑定函数
   getLocation: function(e) {
@@ -34,15 +50,21 @@ Page({
         this.setData({
           latitude: res.latitude,
           longitude: res.longitude,
-          scale: 18
+          scale: 14
         })
       },
     })
   },
   chooseLocation: function(e) {
     wx.chooseLocation({
-      success: function(res) {
-        console.log(res)
+      success: res => {
+        this.setData({
+          latitude: res.latitude,
+          longitude: res.longitude,
+          scale: 14,
+          'markers[0].latitude': res.latitude,
+          'markers[0].longitude': res.longitude
+        })
       },
     })
   },
@@ -70,11 +92,35 @@ Page({
       })
     }
   },
+  inputDepartment: function(e) {
+    this.setData({
+      department: e.detail.value
+    })
+  },
+  inputIll: function(e) {
+    this.setData({
+      ill: e.detail.value
+    })
+  },
+  regionChange: function(e) {
+    this.setData({
+      region: e.detail.value
+    })
+  },
+  findDoctor: function() {
+    let department = this.data.department
+    let ill = this.data.ill
+    let latitude = this.data.latitude
+    let longitude = this.data.longitude
+    
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.mapCtx = wx.createMapContext('myMap')
+    this.getLocation()
   },
 
   /**
