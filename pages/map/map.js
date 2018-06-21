@@ -17,27 +17,17 @@ Page({
       iconPath: '/image/location.png',
       width: 40,
       height: 40,
-      callout: {
-        content: '原点',
-        color: '#ffffff',
-        display: 'ALWAYS',
-        bgColor: '#ff0000',
-        padding: 5,
-        borderRadius: 20,
-      },
-      label: {
-        content: '嘿嘿',
-        color: '#ffffff',
-        bgColor: '#0000ff',
-        anchorX: 10,  // 原点是在左上角
-        anchorY: -30,
-        padding: 5,
-        borderRadius: 20,
-      }
-      
+      // callout: {
+      //   content: '原点',
+      //   color: '#ffffff',
+      //   display: 'ALWAYS',
+      //   bgColor: '#ff0000',
+      //   padding: 5,
+      //   borderRadius: 20,
+      // },
     }],
-    department: '',
-    ill: '',
+    department: '内科',
+    ill: '感冒',
     region: ['浙江省', '嘉兴市', '南湖区']
   },
   // 事件绑定函数
@@ -107,12 +97,60 @@ Page({
       region: e.detail.value
     })
   },
+  init_mark: function() {
+    return {
+      id: 1,
+      latitude: 30.74501,
+      longitude: 120.75,
+      iconPath: '/image/location.png',
+      width: 40,
+      height: 40,
+      label: {
+        content: '',
+        color: '#ffffff',
+        bgColor: '#0000ff',
+        anchorX: 10,  // 原点是在左上角
+        anchorY: -30,
+        padding: 5,
+        borderRadius: 20,
+      }
+    }
+  },
   findDoctor: function() {
     let department = this.data.department
     let ill = this.data.ill
     let latitude = this.data.latitude
     let longitude = this.data.longitude
-    
+
+    wx.request({
+      url: 'https://wx.lawyerstuan.com/test/recommend/doctor',
+      method: 'POST',
+      header: { 'session_id': 'oEHbW5X5wrlS1QOFqgJEGmSeeRtM'},
+      data: {
+        ill: this.data.ill,
+        department: this.data.department,
+        region: this.data.region[0],
+        lat: this.data.latitude,
+        lng: this.data.longitude
+      },
+      success: res=> {
+        console.log(res)
+        let data = res.data.data
+        let markers = []
+        for (let i=0; i<data.length; i++) {
+          let mark = this.init_mark()
+          mark['id'] = i 
+          mark['latitude'] = data[i]['location']['lat']
+          mark['longitude'] = data[i]['location']['lng']
+          mark['label']['content'] = data[i]['姓名']
+          markers.push(mark)
+        }
+        this.setData({
+          markers: markers,
+          scale: 10
+        })
+      }
+    })
     
   },
   /**

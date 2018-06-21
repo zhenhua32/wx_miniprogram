@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: '欢迎使用, 更多功能正在开发中',
     userInfo: {},
     hasUserInfo: false,
   },

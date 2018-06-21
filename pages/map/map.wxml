@@ -19,7 +19,7 @@
   <view class='operation'>
     <button bindtap="getLocation">当前位置</button>
     <button bindtap="chooseLocation">选择位置</button>
-    <button bindtap='findDoctor' disabled='{{ !(department && ill) }}'>寻找医生</button>
+    <button bindtap='findDoctor' disabled='{{ !(department || ill) }}'>寻找医生</button>
   </view>
   <view>
     <text>经度: {{latitude}} </text>
@@ -28,12 +28,12 @@
 
   <view class='operation'>
     <text style='margin-right: 10rpx'>科室: </text>
-    <input placeholder="填写科室" placeholder-style='border-bottom: 10px solid #000' bindconfirm='inputDepartment'/>
+    <input placeholder="填写科室" value='{{department}}' style='border-bottom: 1rpx solid #000' bindconfirm='inputDepartment'/>
   </view>
 
    <view class='operation'>
     <text style='margin-right: 10rpx'>疾病: </text>
-    <input placeholder="填写疾病" placeholder-style='border-bottom: 10px solid #000' bindconfirm='inputIll'/>
+    <input placeholder="填写疾病" value='{{ill}}' style='border-bottom: 1rpx solid #000' bindconfirm='inputIll'/>
   </view>
 
   <view>
