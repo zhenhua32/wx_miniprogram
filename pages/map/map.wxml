@@ -1,16 +1,16 @@
 <!--pages/map/map.wxml-->
 <view class="container">
   <map id="myMap" style="width: 100%; height: 400px;" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" markers="{{markers}}" show-location bindmarkertap='showInfo' bindcallouttap='showInfo'>
-    <cover-view class="controls" wx:if='{{index>=0}}'>
+    <!-- <cover-view class="controls" wx:if='{{index>=0}}'>
       <cover-view>{{marks_data[index]['姓名']}}</cover-view>
       <cover-view>{{marks_data[index]['职称']}}</cover-view>
       <cover-view>{{marks_data[index]['医院']}}</cover-view>
       <cover-view>{{marks_data[index]['科室']}}</cover-view>
       <cover-view>擅长疾病: {{marks_data[index]['擅长疾病标签']}}</cover-view>
-    </cover-view>
+    </cover-view> -->
   </map>
 
-  <scroll-view scroll-x="true" scroll-into-view='page1'>
+  <scroll-view scroll-x="true" scroll-into-view='{{scrool_into}}'>
     <view class='scroll-x'>
       <view>
         <view id='page1' class='scroll-page'>

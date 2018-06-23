@@ -15,7 +15,8 @@ Page({
     ill: '感冒',
     region: ['浙江省', '嘉兴市', '南湖区'],
     marks_data: [],
-    index: -1
+    index: -1,
+    scrool_into: 'page1'
   },
   // 事件绑定函数
   getLocation: function(e) {
@@ -143,7 +144,8 @@ Page({
   showInfo: function(e) {
     console.log(e.markerId)
     this.setData({
-      index: e.markerId
+      index: e.markerId,
+      scrool_into: 'page2'
     })
   },
   /**
