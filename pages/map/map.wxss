@@ -1,20 +1,52 @@
 /* pages/map/map.wxss */
+
 .controls {
   position: relative;
   top: 0%;
-  margin-top: 0px;
-  display: flex;
+  margin: 30rpx;
+  background-color: #fff;
+  overflow-y: scroll;
+  height: auto;
+  max-height: 300rpx;
+  text-align: center;
 }
+
+.controls text {
+  white-space: normal;
+  overflow: scroll;
+}
+
 .controls .scale {
   height: 60rpx;
   margin-right: 20rpx;
-  font-size: 60rpx; 
+  font-size: 60rpx;
 }
- .operation {
+
+.scroll-x {
+  display: flex;
+  flex-direction: row; 
+}
+
+.scroll-page {
+  width: 750rpx;
+  height: 450rpx;
+}
+
+.operation {
   display: flex;
   flex-direction: row;
-  margin: 10rpx;
-} 
+  align-items: center;
+  margin: auto;
+}
 
+.doctor {
+  box-shadow: 0rpx 0rpx 5rpx 5rpx #ccc;
+  margin: 10px 10px 10px 10px;
+}
+
+.doctor text {
+  display: block;
+  text-align: center;
+}
 
 

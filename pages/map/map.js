@@ -10,25 +10,12 @@ Page({
     latitude: 0,
     longitude: 0,
     scale: 5,
-    markers: [{
-      id: 1,
-      latitude: 30.74501,
-      longitude: 120.75,
-      iconPath: '/image/location.png',
-      width: 40,
-      height: 40,
-      // callout: {
-      //   content: '原点',
-      //   color: '#ffffff',
-      //   display: 'ALWAYS',
-      //   bgColor: '#ff0000',
-      //   padding: 5,
-      //   borderRadius: 20,
-      // },
-    }],
+    markers: [],
     department: '内科',
     ill: '感冒',
-    region: ['浙江省', '嘉兴市', '南湖区']
+    region: ['浙江省', '嘉兴市', '南湖区'],
+    marks_data: [],
+    index: -1
   },
   // 事件绑定函数
   getLocation: function(e) {
@@ -125,7 +112,6 @@ Page({
     wx.request({
       url: 'https://wx.lawyerstuan.com/test/recommend/doctor',
       method: 'POST',
-      header: { 'session_id': 'oEHbW5X5wrlS1QOFqgJEGmSeeRtM'},
       data: {
         ill: this.data.ill,
         department: this.data.department,
@@ -147,11 +133,18 @@ Page({
         }
         this.setData({
           markers: markers,
-          scale: 10
+          scale: 10,
+          marks_data: data
         })
       }
     })
     
+  },
+  showInfo: function(e) {
+    console.log(e.markerId)
+    this.setData({
+      index: e.markerId
+    })
   },
   /**
    * 生命周期函数--监听页面加载
