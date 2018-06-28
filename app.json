@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/map/map",  // 放在第一行的就是首页
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/map/map"
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
